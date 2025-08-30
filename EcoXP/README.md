@@ -1,4 +1,4 @@
-# EcoCircle - Community Recycling Platform
+# EcoXP - Community Recycling Platform
 
 A modern web application that encourages community recycling through a rewards system and easy pickup scheduling.
 
@@ -221,5 +221,6 @@ This is a hackathon project designed for demonstration purposes. Feel free to fo
 MIT License - Feel free to use this project for educational and commercial purposes.
 
 ---
+
 
 **Built with ❤️ for a greener future! 🌱** 
