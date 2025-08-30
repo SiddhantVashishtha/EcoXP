@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoXP Dashboard</title>
+
+  <!-- Styles & Fonts -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="nav-logo">
+        <i class="fas fa-recycle"></i>
+        <span>EcoXP</span>
+      </div>
+      <div class="nav-user">
+        <span id="userEmail"></span>
+        <button id="signOut" class="signout-btn" aria-label="Sign out">
+          <i class="fas fa-sign-out-alt"></i>
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard -->
+  <main class="dashboard-container">
+    <!-- Header with Stats -->
+    <header class="dashboard-header">
+      <h1>Welcome back, <span id="userName">User</span>!</h1>
+      <div class="stats-cards">
+        <article class="stat-card">
+          <div class="stat-icon"><i class="fas fa-star"></i></div>
+          <div class="stat-content">
+            <h3 id="totalPoints">0</h3>
+            <p>Total Points</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon"><i class="fas fa-recycle"></i></div>
+          <div class="stat-content">
+            <h3 id="totalPickups">0</h3>
+            <p>Pickups Scheduled</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon"><i class="fas fa-weight-hanging"></i></div>
+          <div class="stat-content">
+            <h3 id="totalWeight">0 kg</h3>
+            <p>Total Recycled</p>
+          </div>
+        </article>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Content -->
+    <section class="dashboard-content">
+      <!-- Left Column: Schedule Pickup -->
+      <aside class="left-column">
+        <div class="card">
+          <h2><i class="fas fa-calendar-plus"></i> Schedule Pickup</h2>
+          <form id="pickupForm" class="pickup-form">
+            <div class="form-group">
+              <label for="materialType">Material Type</label>
+              <select id="materialType" required>
+                <option value="">Select material</option>
+                <option value="plastic">Plastic</option>
+                <option value="paper">Paper & Cardboard</option>
+                <option value="glass">Glass</option>
+                <option value="metal">Metal</option>
+                <option value="electronics">Electronics</option>
+                <option value="organic">Organic Waste</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="quantity">Quantity (kg)</label>
+              <input type="number" id="quantity" min="0.1" step="0.1" required>
+            </div>
+
+            <div class="form-group">
+              <label for="pickupDate">Pickup Date</label>
+              <input type="date" id="pickupDate" required>
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Additional Notes</label>
+              <textarea id="notes" rows="3" placeholder="Any special instructions..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-calendar-check"></i>
+              Schedule Pickup
+            </button>
+          </form>
+        </div>
+      </aside>
+
+      <!-- Right Column -->
+      <aside class="right-column">
+        <!-- Recent Pickups -->
+        <div class="card">
+          <h2><i class="fas fa-history"></i> Recent Pickups</h2>
+          <div id="pickupHistoryList" class="pickup-history">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+
+        <!-- Personal Achievements -->
+        <div class="card">
+          <h2><i class="fas fa-trophy"></i> Your Achievements</h2>
+          <div class="achievements">
+            <div class="achievement" id="firstPickup">
+              <i class="fas fa-medal"></i>
+              <div>
+                <h4>First Pickup</h4>
+                <p>Complete your first recycling pickup</p>
+              </div>
+            </div>
+            <div class="achievement" id="weightMilestone">
+              <i class="fas fa-weight-hanging"></i>
+              <div>
+                <h4>Weight Champion</h4>
+                <p>Recycle 10kg of materials</p>
+              </div>
+            </div>
+            <div class="achievement" id="consistency">
+              <i class="fas fa-calendar-check"></i>
+              <div>
+                <h4>Consistent Recycler</h4>
+                <p>Schedule 5 pickups in a month</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Extra Sections -->
+    <section id="leaderboard-section" class="card">
+      <h2>🏆 Leaderboard</h2>
+      <ul id="leaderboard"></ul>
+    </section>
+
+    <section id="badges-section" class="card">
+      <h2>🎖️ Global Badges</h2>
+      <div id="badges"></div>
+    </section>
+
+    <section id="pickup-history-section" class="card">
+      <h2>📦 Full Pickup History</h2>
+      <div id="pickupHistorySection"></div>
+    </section>
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  
+  <!-- App Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
